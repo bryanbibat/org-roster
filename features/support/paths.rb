@@ -14,6 +14,9 @@ module NavigationHelpers
     when /the login\s?page/
       '/login'
  
+    when /the create account\s?page/
+      '/account/new'
+      
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
