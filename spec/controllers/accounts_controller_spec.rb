@@ -28,7 +28,7 @@ describe AccountsController, "POST create" do
   integrate_views
 
   before(:each) do 
-    @user = mock_model(User, :email => nil, :password => nil, :password_confirmation => nil)
+    @user = Factory(:user)
     User.stub!(:new).and_return @user
     controller.stub!(:current_user_session).and_return nil
     User.stub!(:admin_exists?).and_return false 
