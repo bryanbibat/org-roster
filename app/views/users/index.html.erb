@@ -1,0 +1,13 @@
+<% title "List Users" %>
+
+<table id="users">
+  <% for user in @users %>
+    <tr>
+      <td><%=h "#{user.last_name}, #{user.first_name}" %></td>
+    </tr>
+  <% end %>
+</table>
+
+<% if @current_user.admin? %>
+  <%= link_to "New User", new_user_path %>
+<% end %>

@@ -14,6 +14,16 @@ describe User, "validation" do
     @user.should_not be_valid
   end
 
+  it "should not be valid if first name is missing" do
+    @user.first_name = nil
+    @user.should_not be_valid
+  end
+
+  it "should not be valid if last name is missing" do
+    @user.last_name = nil
+    @user.should_not be_valid
+  end
+
   #missing password already handled by Authlogic
 
 end

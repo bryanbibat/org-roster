@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+  before_filter :require_user
+  before_filter :require_admin, :except => :index
+
+  def index
+    @users = User.all(:order => "last_name, first_name")
+  end
+
   def new
     @user = User.new
   end

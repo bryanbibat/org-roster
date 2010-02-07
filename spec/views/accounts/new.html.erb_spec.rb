@@ -21,6 +21,21 @@ describe "accounts/new.html.erb" do
                                   :value=> "test@email.co")
   end
 
+  it "should render a text field for first name" do
+    @user.stub!(:first_name).and_return "first"
+    render "accounts/new.html.erb"
+    response.should have_selector("input[type=text]", 
+                                  :name => "user[first_name]", 
+                                  :value=> "first")
+  end
+
+  it "should render a text field for last name" do
+    @user.stub!(:last_name).and_return "last"
+    render "accounts/new.html.erb"
+    response.should have_selector("input[type=text]", 
+                                  :name => "user[last_name]", 
+                                  :value=> "last")
+  end
 
   it "should render a text field for password" do
     @user.stub!(:password).and_return ""
