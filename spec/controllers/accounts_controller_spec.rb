@@ -27,6 +27,13 @@ end
 describe AccountsController, "POST create" do
   integrate_views
 
+  before(:each) do 
+    @user = mock_model(User, :email => nil, :password => nil, :password_confirmation => nil)
+    User.stub!(:new).and_return @user
+    controller.stub!(:current_user_session).and_return nil
+    User.stub!(:admin_exists?).and_return false 
+  end
+   
   it "should not create new account if admin exists page" do
     User.stub!(:admin_exists?).and_return true
     post :create
@@ -34,5 +41,17 @@ describe AccountsController, "POST create" do
     flash[:notice].should == "New accounts can only be created by Admin users." 
   end
 
+  it "should redirect to login page when an account is successfully created" do
+    @user.stub!(:save).and_return true
+    post :create
+    response.should redirect_to(login_url)
+    flash[:notice].should == "New account created. You can now login with the new account's credentials."
+  end
+
+  it "should not redirect if there is an error in the entered values" do
+    @user.stub!(:save).and_return false
+    post :create
+    response.should render_template(:new)
+  end
 
 end

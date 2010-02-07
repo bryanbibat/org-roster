@@ -6,6 +6,16 @@ class AccountsController < ApplicationController
     @user = User.new
   end
 
+  def create
+    @user = User.new(params[:user])
+    if @user.save
+      flash[:notice] = "New account created. You can now login with the new account's credentials."
+      redirect_to login_url
+    else 
+      render :action => 'new'
+    end
+  end
+
   private 
     
     def admin_missing
