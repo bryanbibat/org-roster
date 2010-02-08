@@ -1,11 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Roster - <%= yield(:title) || "" %> </title>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <title>Online Roster - <%= yield(:title) || "Main" %> </title>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <!-- add your meta tags here -->
+<%= stylesheet_link_tag "main" %>
 </head>
 <body>
+  <div id="header">
+    <span id="session">
+      <% if current_user %>
+        Logged in as <%= current_user.email %> |
+        <%= link_to "Logout", logout_path %>
+      <% else %>
+        <%= link_to "Login", login_path %>
+      <% end %>
+    </span>
+  </div>
+  <div id="navigation">
+    <%= link_to "Home", root_url %>
+    <% if current_user %>
+      <%= link_to "Users", users_path %>
+    <% end %>
+  </div>
+  <div id="breadcrumbs"></div>
   <div id="main">
     <%= flash_messages %> 
     <%= yield %>

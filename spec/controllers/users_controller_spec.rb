@@ -75,7 +75,7 @@ describe UsersController, "POST create" do
   #TODO integrate_view
 
   before(:each) do 
-    @user = mock_model(User, :save => nil, :admin? => true)
+    @user = mock_model(User, :save => nil, :id => 1, :admin? => true)
     User.stub!(:new).and_return @user
     controller.stub!(:current_user).and_return @user
   end
@@ -94,7 +94,7 @@ describe UsersController, "POST create" do
   it "create action should redirect when model is valid" do
     @user.stub!(:save).and_return true 
     post :create
-    response.should redirect_to(root_url)
+    response.should redirect_to(user_url(@user))
   end
 end
 
@@ -102,15 +102,20 @@ describe UsersController, "POST update" do
   
 
   before(:each) do 
-    @user = mock_model(User, :update_attributes => nil, :admin? => true)
+    @user = mock_model(User, :update_attributes => nil)
     User.stub!(:find).and_return @user
-    controller.stub!(:current_user).and_return @user
+    controller.stub!(:current_user).and_return mock_model(User, :id => 1, :admin? => true)
   end
   
   #TODO check if parameter is present
   it "edit action should render edit template" do
-    get :edit
+    get :edit, :id => 2
     response.should render_template(:edit)
+  end
+
+  it "edit action should redirect to user's account if user's own record is clicked" do
+    get :edit, :id => 1
+    response.should redirect_to(edit_account_url)
   end
   
   it "update action should render edit template when model is invalid" do
@@ -122,6 +127,6 @@ describe UsersController, "POST update" do
   it "update action should redirect when model is valid" do
     @user.stub!(:update_attributes).and_return true 
     put :update
-    response.should redirect_to(root_url)
+    response.should redirect_to(user_url(@user))
   end
 end
