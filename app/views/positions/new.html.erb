@@ -1,0 +1,29 @@
+<%= render :partial => "populate_script" %>
+
+<h1>New position</h1>
+
+<% form_for [@user, @position] do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user %><br />
+    <%=h @user.email %>
+  </p>
+  <p>
+    <%= f.label :committee %><br />
+    <%= collection_select(:position, :committee_id, @committees, :id, :code) %>
+  </p>
+  <p>
+    <%= f.label :role %><br />
+    <%= collection_select(:position, :role_id, @roles, :id, :name) %>
+  </p>
+  <p>
+    <%= f.label :year %><br />
+    <%= f.text_field :year %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', @user %>

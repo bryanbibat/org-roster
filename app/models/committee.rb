@@ -1,6 +1,7 @@
 class Committee < ActiveRecord::Base
 
   has_many :roles, :dependent => :delete_all
+  has_many :positions, :dependent => :delete_all
 
   validates_presence_of :code, :full_name, :year_added
 

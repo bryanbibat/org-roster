@@ -1,5 +1,12 @@
 class RolesController < ApplicationController
 
+  def index
+    @committee = Committee.find(params[:committee_id])
+    respond_to do |format|
+      format.xml { render :xml => @committee.roles }
+    end
+  end
+
   # GET /roles/new
   # GET /roles/new.xml
   def new

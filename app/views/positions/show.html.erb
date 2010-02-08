@@ -1,0 +1,23 @@
+<p>
+  <b>User:</b>
+  <%=h @position.user %>
+</p>
+
+<p>
+  <b>Committee:</b>
+  <%=h @position.committee %>
+</p>
+
+<p>
+  <b>Role:</b>
+  <%=h @position.role %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%=h @position.year %>
+</p>
+
+
+<%= link_to 'Edit', edit_position_path(@position) %> |
+<%= link_to 'Back', positions_path %>

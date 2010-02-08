@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100208160045) do
+ActiveRecord::Schema.define(:version => 20100208161634) do
 
   create_table "batches", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(:version => 20100208160045) do
     t.integer  "year_added",   :null => false
     t.integer  "year_removed"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "positions", :force => true do |t|
+    t.integer  "user_id",      :null => false
+    t.integer  "committee_id", :null => false
+    t.integer  "role_id",      :null => false
+    t.integer  "year"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

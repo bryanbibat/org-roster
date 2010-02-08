@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     redirect_to account_url() if params[:id].to_i == current_user.id
     @user = User.find(params[:id])
     @batches = Batch.all(:order => "applicant_batch")
+    @positions = @user.positions
   end
   
   def create

@@ -1,0 +1,21 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("#position_committee_id").change( populateRoles ) 
+      if ($("select#position_role_id option").size() == 0) {
+        populateRoles();
+      }
+  })
+
+
+  function populateRoles() {
+    $.get("/committees/" + $("#position_committee_id").val() + "/roles.xml", {}, function(xml) {
+      var options = "";
+      $("role", xml).each(function() {
+        options += '<option value ="' + $(this).find('id').text() + '">' +
+        $(this).find('name').text() + '</option>';
+        })
+      $("select#position_role_id").html(options);
+    })
+  }
+
+</script>
