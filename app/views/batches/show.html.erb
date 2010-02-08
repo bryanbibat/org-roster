@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%=h @batch.name %>
+</p>
+
+<p>
+  <b>Order:</b>
+  <%=h @batch.applicant_batch %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%=h @batch.year %>
+</p>
+
+
+<%= link_to 'Edit', edit_batch_path(@batch) %> |
+<%= link_to 'Back', batches_path %>

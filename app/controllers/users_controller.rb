@@ -8,11 +8,13 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @batches = Batch.all(:order => "applicant_batch")
   end
 
   def show
     redirect_to account_url() if params[:id].to_i == current_user.id
     @user = User.find(params[:id])
+    @batches = Batch.all(:order => "applicant_batch")
   end
   
   def create
@@ -21,6 +23,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Successfully created user."
       redirect_to user_url(@user)
     else
+      @batches = Batch.all(:order => "applicant_batch")
       render :action => 'new'
     end
   end
@@ -28,6 +31,7 @@ class UsersController < ApplicationController
   def edit
     redirect_to edit_account_url() if params[:id].to_i == current_user.id
     @user = User.find(params[:id])
+    @batches = Batch.all(:order => "applicant_batch")
   end
   
   def update
@@ -36,6 +40,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Successfully updated user."
       redirect_to user_url(@user)
     else
+      @batches = Batch.all(:order => "applicant_batch")
       render :action => 'edit'
     end
   end

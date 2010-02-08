@@ -20,6 +20,11 @@
     <%= f.label :last_name %><br />
     <%= f.text_field :last_name %>
   </p>
+  <p>
+    <%= f.label :batch_id, "Batch" %><br />
+    <%= collection_select(:user, :batch_id, @batches, :id, :display_name) %>
+  </p>
+ 
  
   <p><%= f.submit "Submit" %></p>
 <% end %>

@@ -24,5 +24,35 @@
 </p>
 
 
-<%= link_to 'Edit', edit_committee_path(@committee) %> |
+<%= link_to 'Edit', edit_committee_path(@committee) %> 
+
+<h1>Listing roles</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Unique</th>
+  </tr>
+  
+  <% @roles.each do |role| %>
+    <tr>
+      <td><%=h role.name %></td>
+      <td><%=h role.description %></td>
+      <td><%=h role.unique %></td>
+      <td><%= link_to 'Edit', edit_committee_role_path(@committee, role) %></td>
+      <td><%= link_to 'Destroy', committee_role_path(@committee, role), :confirm => 'Are you sure?', :method => :delete %></td>
+
+    </tr>
+  <% end %>
+
+</table>
+
+<br />
+
+<%= link_to 'New role', new_committee_role_path(@committee) %>
+
+<br />
+
+
 <%= link_to 'Back', committees_path %>

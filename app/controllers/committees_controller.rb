@@ -16,6 +16,7 @@ class CommitteesController < ApplicationController
   # GET /committees/1.xml
   def show
     @committee = Committee.find(params[:id])
+    @roles = @committee.roles
 
     respond_to do |format|
       format.html # show.html.erb

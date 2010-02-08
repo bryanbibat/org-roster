@@ -1,4 +1,7 @@
 class Committee < ActiveRecord::Base
+
+  has_many :roles, :dependent => :delete_all
+
   validates_presence_of :code, :full_name, :year_added
 
   validate :start_year_cannot_be_before_org_founding, :end_year_cannot_be_before_start_year

@@ -1,0 +1,24 @@
+<h1>Listing batches</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Order</th>
+    <th>Year</th>
+  </tr>
+
+<% @batches.each do |batch| %>
+  <tr>
+    <td><%=h batch.name %></td>
+    <td><%=h batch.applicant_batch %></td>
+    <td><%=h batch.year %></td>
+    <td><%= link_to 'Show', batch %></td>
+    <td><%= link_to 'Edit', edit_batch_path(batch) %></td>
+    <td><%= link_to 'Destroy', batch, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New batch', new_batch_path %>

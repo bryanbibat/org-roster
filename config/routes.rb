@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :committees
+  map.resources :batches
+
+
+  map.resources :committees, :has_many => :roles
 
   map.resources :system_parameters
 
