@@ -1,0 +1,28 @@
+<p>
+  <b>Code:</b>
+  <%=h @committee.code %>
+</p>
+
+<p>
+  <b>Full name:</b>
+  <%=h @committee.full_name %>
+</p>
+
+<p>
+  <b>Year institutionalized:</b>
+  <%=h @committee.year_added %>
+</p>
+
+<p>
+  <b>Year removed:</b>
+  <%=h @committee.year_removed %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @committee.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_committee_path(@committee) %> |
+<%= link_to 'Back', committees_path %>

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :committees
+
   map.resources :system_parameters
 
   map.login "login", :controller => "user_sessions", :action => "new", :conditions => { :method => :get }
