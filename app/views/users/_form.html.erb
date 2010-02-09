@@ -23,15 +23,51 @@
     <%= f.text_field :last_name %>
   </p>
   <p>
+    <%= f.label :nickname %><br />
+    <%= f.text_field :nickname %>
+  </p>
+  <p>
+    <%= f.label :other_aliases  %><br />
+    <%= f.text_area :other_aliases %>
+  </p>
+  <p>
     <%= f.label :batch_id, "Batch" %><br />
     <%= collection_select(:user, :batch_id, @batches, :id, :display_name_long) %>
   </p>
-  <% if !@user.new_record? %>
   <p>
     <%= f.label :buddy_id, "Buddy" %><br />
     <%= collection_select(:user, :buddy_id, @user.possible_buddies, :id, :display_name) %>
   </p>
-  <% end %>
+  <p>
+    <%= f.label :facebook %><br />
+    <%= f.text_field :facebook %> 
+    <span class="instruction">Use either your Username (e.g. http://www.facebook.com/<strong>bryanbibat</strong>) or profile ID (e.g. http://www.facebook.com/profile.php?id=<strong>753408797</strong>)</span>
+  </p>
+  <p>
+    <%= f.label :twitter %><br />
+    <%= f.text_field :twitter %>
+  </p>
+  <p>
+    <%= f.label :multiply  %><br />
+    <%= f.text_field :multiply %>
+  </p>
+  <p>
+    <%= f.label :plurk %><br />
+    <%= f.text_field :plurk %>
+  </p>
+  <p>
+    <%= f.label :tumblr  %><br />
+    <%= f.text_field :tumblr %>
+  </p>
+  <p>
+    <%= f.label :livejournal  %><br />
+    <%= f.text_field :livejournal %>
+  </p>
+  <p>
+    <%= f.label :linkedin %><br />
+    <%= f.text_field :linkedin %> 
+    <span class="instruction">provide the url to your public profile e.g. http://ph.linkedin.com/in/bryanbibat</span>
+  </p>
  
   <p><%= f.submit "Submit" %></p>
 <% end %>

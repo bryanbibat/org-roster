@@ -31,4 +31,49 @@ module ApplicationHelper
     select model, name, options_for_select(options)
   end
 
+  def facebook_badge(facebook)
+    unless facebook.blank?
+      link_to image_tag("facebook.png", :border => 0, :title => "Facebook"), "http://www.facebook.com/#{ 
+        (/^[\d]*$/ =~ facebook).nil? ? 
+        facebook :  "profile.php?id=#{facebook}" }"
+    end
+  end
+
+  def twitter_badge(twitter)
+    unless twitter.blank?
+      link_to image_tag("twitter.png", :border => 0, :title => "Twitter"), "http://www.twitter.com/#{ twitter }"
+    end
+  end
+
+  def multiply_badge(multiply)
+    unless multiply.blank?
+      link_to image_tag("multiply.png", :border => 0, :title => "Multiply"), "http://#{ multiply }.multiply.com/"
+    end
+  end
+
+  def plurk_badge(plurk)
+    unless plurk.blank?
+      link_to image_tag("plurk.png", :border => 0, :title => "Plurk"), "http://www.plurk.com/#{ plurk }"
+    end
+  end
+
+  def tumblr_badge(tumblr)
+    unless tumblr.blank?
+      link_to image_tag("tumblr.png", :border => 0, :title => "tumblr"), "http://#{ tumblr }.tumblr.com/"
+    end
+  end
+
+  def livejournal_badge(livejournal)
+    unless livejournal.blank?
+      link_to image_tag("livejournal.png", :border => 0, :title => "LiveJournal"), "http://#{ livejournal }.livejournal.com/"      
+    end
+  end
+
+  def linkedin_badge(linkedin)
+    unless linkedin.blank?
+      link_to image_tag("linkedin.png", :border => 0, :title => "LinkedIn"), linkedin
+    end
+  end
+
+
 end

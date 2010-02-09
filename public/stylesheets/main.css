@@ -1,5 +1,5 @@
 body {
-  font: 100.01% "Fontin Sans", Fontin-Sans, "Myriad Pro", "Lucida Grande", "Lucida Sans Unicode", Lucida, Verdana, Helvetica, sans-serif;
+  font: 100% 'Lucida Grande', Verdana, Helvetica, Arial sans-serif;
 }
 
 table {
@@ -10,7 +10,7 @@ tr, td, th {
 }
 
 td, th  {
-  font-size: 70%;
+  font-size: 80%;
   padding: 3px;
 }
 
@@ -18,6 +18,13 @@ td.number {
   text-align: right;
 }
 
+p, dd, dt {
+  font-size: 80%;
+}
+
+dt {
+  font-weight:bold;
+}
 .notice { background: #efe; color: #040; border: 2px #484 solid; padding: 10px; margin-bottom: 1em; }
 .warning { background: #ffe; color: #440; border: 2px #884 solid; padding: 10px; margin-bottom: 1em; }
 .error { background: #fee; color: #400; border: 2px #844 solid; padding: 10px; margin-bottom: 1em; }

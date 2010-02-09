@@ -30,10 +30,13 @@ class User < ActiveRecord::Base
   end
 
   def possible_buddies
+    
     User.find_by_sql(["SELECT * FROM users " + 
                       "WHERE EXISTS (SELECT 1 FROM batches WHERE " + 
                       "users.batch_id = batches.id " + 
                       "AND batches.applicant_batch < ?)",
-                      batch.applicant_batch])
+                      batch.nil? ? 0 : batch.applicant_batch])
   end
+
+
 end
