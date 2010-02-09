@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_filter :require_user
   before_filter :require_admin, :only => [:new, :create, :delete]
+  before_filter :require_admin_or_current => [:edit_credentials, :update_credentials]
+  before_filter :remove_role_from_params
 
   def index
     @users = User.all(:order => "last_name, first_name")
@@ -44,6 +46,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_credentials
+    @user = User.find(params[:id])
+  end
+  
+  def update_credentials
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Successfully updated user."
+      redirect_to user_url(@user)
+    else
+      render :action => 'edit_credentials'
+    end
+  end
+
   def destroy 
     @user = User.find(params[:id])
     @user.destroy
@@ -51,4 +67,20 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  private 
+    def require_admin_or_current
+      unless current_user and 
+        (current_user.admin? || current_user == params[:id])
+        flash[:notice] = "You must be an admin or the owner of the profile " +
+          "to access this page."
+        redirect_to users_url(params[:id])
+        return false 
+      end
+    end
+
+    def remove_role_from_params
+      if !current_user.admin? && !params[:user].nil?
+        params[:user].delete(:role)
+      end
+    end
 end

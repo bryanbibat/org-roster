@@ -8,32 +8,35 @@
 <%= javascript_include_tag "jquery-1.4.1.min" %>
 </head>
 <body>
-  <div id="header">
-    <span id="session">
-      <% if current_user %>
-        Logged in as <%= current_user.email %> |
-        <%= link_to "Logout", logout_path %>
-      <% else %>
-        <%= link_to "Login", login_path %>
-      <% end %>
-    </span>
-  </div>
-  <div id="navigation">
-    <%= link_to "Home", root_url %>
-    <% if current_user %>
-      <%= link_to "Users", users_path %>
-      <%= link_to "Committees", committees_path %>
-      <%= link_to "Batches", batches_path %>
-      <% if current_user.admin? %>
-        <%= link_to "System Parameters", system_parameters_path %>
-      <% end %>
-    <% end %>
-   
-  </div>
-  <div id="breadcrumbs"></div>
-  <div id="main">
-    <%= flash_messages %> 
-    <%= yield %>
+  <div id="margins">
+    <div id="page">
+      <div id="header">
+        <div id="session">
+          <% if current_user %>
+            Logged in as <%= current_user.email %> |
+            <%= link_to "Logout", logout_path %>
+          <% else %>
+            <%= link_to "Login", login_path %>
+          <% end %>
+        </div>
+      </div>
+      <div id="navigation">
+        <%= link_to "Home", root_url %>
+        <% if current_user %>
+          <%= link_to "Users", users_path %>
+          <%= link_to "Committees", committees_path %>
+          <%= link_to "Batches", batches_path %>
+          <% if current_user.admin? %>
+            <%= link_to "System Parameters", system_parameters_path %>
+          <% end %>
+        <% end %>
+      </div>
+      <div id="breadcrumbs"></div>
+      <div id="main">
+        <%= flash_messages %> 
+        <%= yield %>
+      </div>
+    </div>
   </div>
 </body>
 </html>

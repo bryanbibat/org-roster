@@ -1,6 +1,7 @@
 class CommitteesController < ApplicationController
-  # GET /committees
-  # GET /committees.xml
+  before_filter :require_user
+  before_filter :require_admin, :except => [:index, :show]
+
   def index
     @committees = Committee.all(:conditions => ["year_removed is null"], :order => "code")
     @committees += Committee.all(:conditions => ["year_removed is not null"], :order => "year_removed, code")

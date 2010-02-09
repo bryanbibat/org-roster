@@ -4,20 +4,14 @@
   <tr>
     <th>Code</th>
     <th>Full name</th>
-    <th>Year institutionalized</th>
-    <th>Year removed</th>
-    <th>Description</th>
+    <th>Years Active</th>
   </tr>
 
 <% @committees.each do |committee| %>
   <tr>
     <td><%=link_to (h committee.code), committee %></td>
     <td><%=h committee.full_name %></td>
-    <td><%=h committee.year_added %></td>
-    <td><%=h committee.year_removed %></td>
-    <td><%=h committee.description %></td>
-    <td><%= link_to 'Edit', edit_committee_path(committee) %></td>
-    <td><%= link_to 'Delete', committee, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= "#{committee.year_added} - #{committee.year_removed ||= "present"}" %></td>
   </tr>
 <% end %>
 </table>

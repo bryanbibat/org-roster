@@ -1,5 +1,48 @@
+html * {
+  font-size: 100.01%;
+}
+
 body {
-  font: 100% 'Lucida Grande', Verdana, Helvetica, Arial sans-serif;
+  font: 75% 'Lucida Grande', Verdana, Helvetica, Arial sans-serif;
+  background: #258;
+}
+
+#margins {
+  margin: 0px auto;
+  width: 800px;
+  background: #FFF;
+}
+
+#page {
+  padding: 10px;
+}
+
+#header {
+  position: relative;
+  height:80px;
+}
+
+
+#session {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
+div#session a {
+  color: #999;
+}
+
+#navigation {
+  padding: 5px 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration:underline;
 }
 
 table {
@@ -10,7 +53,6 @@ tr, td, th {
 }
 
 td, th  {
-  font-size: 80%;
   padding: 3px;
 }
 
@@ -19,7 +61,6 @@ td.number {
 }
 
 p, dd, dt {
-  font-size: 80%;
 }
 
 dl {

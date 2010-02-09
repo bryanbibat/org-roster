@@ -9,14 +9,15 @@
 </p>
 
 <p>
-  <b>Year institutionalized:</b>
+  <b>Year Institutionalized:</b>
   <%=h @committee.year_added %>
 </p>
-
+<% if !@committee.year_removed.blank? %>
 <p>
-  <b>Year removed:</b>
+  <b>Year Removed:</b>
   <%=h @committee.year_removed %>
 </p>
+<% end %>
 
 <p>
   <b>Description:</b>
@@ -48,11 +49,14 @@
 
 </table>
 
-<br />
+<p>
+  <%= link_to 'New role', new_committee_role_path(@committee) %>
+</p>
 
-<%= link_to 'New role', new_committee_role_path(@committee) %>
-
-<br />
-
-
-<%= link_to 'Back', committees_path %>
+<p> 
+  <% if current_user.admin? %>
+    <td><%= link_to 'Edit', edit_committee_path(@committee) %></td>
+    <td><%= link_to 'Delete', @committee, :confirm => 'Are you sure?', :method => :delete %></td>
+  <% end %>
+  <%= link_to 'Back', committees_path %>
+</p>
