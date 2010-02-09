@@ -1,4 +1,5 @@
 class PositionsController < ApplicationController
+  before_filter :set_years
 
   # GET /positions/new
   # GET /positions/new.xml
@@ -81,4 +82,11 @@ class PositionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+    def set_years
+      @year_founded = SystemParameter.find_by_code("year_founded").value.to_i
+      @current_academic_year = Time.now.year - (Time.now.month < 6 ? 1 : 0)
+    end
+
 end

@@ -3,7 +3,7 @@
 <table id="users">
   <% for user in @users %>
     <tr>
-      <td><%= link_to "#{user.last_name}, #{user.first_name}", user_path(user) %></td>
+      <td><%= link_to user.display_name, user_path(user) %></td>
     </tr>
   <% end %>
 </table>

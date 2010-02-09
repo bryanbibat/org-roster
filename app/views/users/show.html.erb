@@ -4,7 +4,7 @@
 
 <p>
   <span class="label">Name: </span>
-  <span class="value"><%=h "#{@user.last_name}, #{@user.first_name}" %></span>
+  <span class="value"><%=h @user.display_name %></span>
 </p>
 <p>
   <span class="label">Email: </span>
@@ -15,6 +15,27 @@
   <span class="label">Batch: </span>
   <span class="value"><%=h @user.batch_display  %></span>
 </p>
+
+<% if !@user.buddy_id.nil? %>
+<p>
+  <span class="label">Buddy Member: </span>
+  <span class="value"><%=h @user.buddy_mem.display_name  %></span>
+</p>
+<% end %>
+
+<% if @user.buddy_apps.count > 0 %>
+<h2>Buddy Apps</h2>
+
+  <table id="users">
+    <% for user in @user.buddy_apps %>
+      <tr>
+        <td><%= link_to user.display_name, user_path(user) %></td>
+      </tr>
+
+    <% end %>
+  </table>
+
+<% end %>
 
 <h2>Positions Held</h2>
 

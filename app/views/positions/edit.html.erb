@@ -19,7 +19,7 @@
   </p>
   <p>
     <%= f.label :year %><br />
-    <%= f.text_field :year %>
+    <%= select_academic_year :year, 2000, 2010 %>
   </p>
   <p>
     <%= f.submit 'Update' %>

@@ -4,6 +4,7 @@
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </p>
+  <% if @user.new_record? %>  
   <p>
     <%= f.label :password %><br />
     <%= f.password_field :password %>
@@ -12,6 +13,7 @@
     <%= f.label :password_confirmation, "Repeat Password" %><br />
     <%= f.password_field :password_confirmation %>
   </p>
+  <% end %>
   <p>
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name %>
@@ -22,9 +24,14 @@
   </p>
   <p>
     <%= f.label :batch_id, "Batch" %><br />
-    <%= collection_select(:user, :batch_id, @batches, :id, :display_name) %>
+    <%= collection_select(:user, :batch_id, @batches, :id, :display_name_long) %>
   </p>
- 
+  <% if !@user.new_record? %>
+  <p>
+    <%= f.label :buddy_id, "Buddy" %><br />
+    <%= collection_select(:user, :buddy_id, @user.possible_buddies, :id, :display_name) %>
+  </p>
+  <% end %>
  
   <p><%= f.submit "Submit" %></p>
 <% end %>

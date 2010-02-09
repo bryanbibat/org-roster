@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100208161634) do
+ActiveRecord::Schema.define(:version => 20100209075035) do
 
   create_table "batches", :force => true do |t|
     t.string   "name"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20100208161634) do
     t.string   "first_name",        :null => false
     t.string   "last_name",         :null => false
     t.integer  "batch_id"
+    t.integer  "buddy_id"
   end
 
 end
