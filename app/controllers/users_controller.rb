@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_user
-  before_filter :require_admin, :except => [:index, :show]
+  before_filter :require_admin, :only => [:new, :create, :delete]
 
   def index
     @users = User.all(:order => "last_name, first_name")
@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    redirect_to account_url() if params[:id].to_i == current_user.id
     @user = User.find(params[:id])
     @batches = Batch.all(:order => "applicant_batch")
     @positions = @user.positions
@@ -30,7 +29,6 @@ class UsersController < ApplicationController
   end
   
   def edit
-    redirect_to edit_account_url() if params[:id].to_i == current_user.id
     @user = User.find(params[:id])
     @batches = Batch.all(:order => "applicant_batch")
   end
@@ -44,6 +42,13 @@ class UsersController < ApplicationController
       @batches = Batch.all(:order => "applicant_batch")
       render :action => 'edit'
     end
+  end
+
+  def destroy 
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = 'User was successfully deleted.'
+    redirect_to users_path
   end
 
 end
