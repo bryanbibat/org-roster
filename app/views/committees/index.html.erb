@@ -11,14 +11,13 @@
 
 <% @committees.each do |committee| %>
   <tr>
-    <td><%=h committee.code %></td>
+    <td><%=link_to (h committee.code), committee %></td>
     <td><%=h committee.full_name %></td>
     <td><%=h committee.year_added %></td>
     <td><%=h committee.year_removed %></td>
     <td><%=h committee.description %></td>
-    <td><%= link_to 'Show', committee %></td>
     <td><%= link_to 'Edit', edit_committee_path(committee) %></td>
-    <td><%= link_to 'Destroy', committee, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Delete', committee, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

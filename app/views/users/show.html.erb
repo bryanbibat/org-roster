@@ -1,26 +1,21 @@
 <% title "Show User Details " %>
 
-<h1>User Details</h1>
+<p>
+<%= user_pic(@user.picture_url) %><br/>
+<span class="nickname"><%=h @user.nickname %></span> (<%=h @user.display_name %>)
+</p>
 
-<p>
-  <dt>Name: </dt>
-  <dd><%=h @user.display_name %></dd>
-</p>
-<p>
-  <dt>Nickname: </dt>
-  <dd><%=h @user.nickname %></dd>
-</p>
-<p>
-  <dt>Other nicknames and online aliases: </dt>
+
+<dl>
+  <dt>Other nicknames/aliases: </dt>
   <dd><%=h @user.other_aliases %></dd>
-</p>
+</dl>
 
-
-<p>
+<dl>
   <dt>Email: </dt>
   <dd><%=h @user.email %></dd>
-</p>
-<p>
+</dl>
+<dl>
   <dt>Social Networking sites: </dt>
   <dd>
   <%= facebook_badge(@user.facebook) %>
@@ -31,19 +26,18 @@
   <%= livejournal_badge(@user.livejournal) %>
   <%= linkedin_badge(@user.linkedin) %>
   </dd>
-</p>
+</dl>
 
-
-<p>
+<dl>
   <dt>Batch: </dt>
   <dd><%=h @user.batch_display  %></dd>
-</p>
+</dl>
 
 <% if !@user.buddy_id.nil? %>
-<p>
+<dl>
   <dt>Buddy Member: </dt>
   <dd><%= link_to @user.buddy_mem.display_name, @user.buddy_mem  %></dd>
-</p>
+</dl>
 <% end %>
 
 <% if @user.buddy_apps.count > 0 %>
@@ -71,11 +65,11 @@
   
   <% @positions.each do |position| %>
     <tr>
-      <td><%=h position.committee.code %></td>
+      <td><%=link_to (h position.committee.code), position.committee %></td>
       <td><%=h position.role.name %></td>
       <td><%=h position.year %></td>
       <td><%= link_to 'Edit', edit_user_position_path(@user, position) %></td>
-      <td><%= link_to 'Destroy', user_position_path(@user, position), :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to 'Delete', user_position_path(@user, position), :confirm => 'Are you sure?', :method => :delete %></td>
 
     </tr>
   <% end %>

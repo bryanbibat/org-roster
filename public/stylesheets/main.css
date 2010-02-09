@@ -22,9 +22,31 @@ p, dd, dt {
   font-size: 80%;
 }
 
-dt {
+dl {
+  display:block;
+}
+
+span.nickname {
+  font-size: 120%;
   font-weight:bold;
 }
+
+dt {
+  font-weight:bold;
+  width: 200px;
+  float: left;
+  clear: left;
+  padding: 0 0 5px 0;
+}
+
+dd {
+  float: left;
+}
+
+h2 {
+  clear:left;
+}
+
 .notice { background: #efe; color: #040; border: 2px #484 solid; padding: 10px; margin-bottom: 1em; }
 .warning { background: #ffe; color: #440; border: 2px #884 solid; padding: 10px; margin-bottom: 1em; }
 .error { background: #fee; color: #400; border: 2px #844 solid; padding: 10px; margin-bottom: 1em; }

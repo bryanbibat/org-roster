@@ -31,6 +31,16 @@
     <%= f.text_area :other_aliases %>
   </p>
   <p>
+    <%= f.label :picture_url %><br />
+    <%= f.text_field :picture_url %>
+    <span class="instruction">Please provide the URL for a picture, preferrably
+      a square pic less than 100KB in size (a "real" pic, para makilala kayo 
+      ng ibang users pag nakita kayo in person). You can use sites like 
+      <%= link_to "ImageShack", "http://www.imageshack.com/" %> and 
+      <%= link_to "Photobucket", "http://www.photobucket.com/" %> to upload 
+      your pics to the Internet.<span>
+  </p>
+  <p>
     <%= f.label :batch_id, "Batch" %><br />
     <%= collection_select(:user, :batch_id, @batches, :id, :display_name_long) %>
   </p>

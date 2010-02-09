@@ -74,6 +74,10 @@ module ApplicationHelper
       link_to image_tag("linkedin.png", :border => 0, :title => "LinkedIn"), linkedin
     end
   end
-
-
+ 
+  def user_pic(picture_url)
+    unless picture_url.blank?
+      image_tag picture_url
+    end
+  end
 end
