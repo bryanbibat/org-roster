@@ -38,14 +38,14 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th>Unique</th>
+    <th>Part of Executive Committee?</th>
   </tr>
   
   <% @roles.each do |role| %>
     <tr>
       <td><%=h role.name %></td>
       <td><%=h role.description %></td>
-      <td><%=h role.unique %></td>
+      <td><%=h role.execom %></td>
       <% if current_user.admin? %>
         <td>
           <%= link_to (image_tag "edit.png", :border => 0, :title => "Edit"), 

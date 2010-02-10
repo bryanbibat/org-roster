@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100209100555) do
+ActiveRecord::Schema.define(:version => 20100210120935) do
 
   create_table "batches", :force => true do |t|
     t.string   "name"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(:version => 20100209100555) do
     t.string   "name",         :null => false
     t.integer  "committee_id", :null => false
     t.text     "description"
-    t.boolean  "unique"
+    t.boolean  "execom"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
