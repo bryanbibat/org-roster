@@ -9,8 +9,8 @@ class AccountsController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] = "New account created. You can now login with the new account's credentials."
-      redirect_to login_url
+      flash[:notice] = "New account created and automatically logged in."
+      redirect_to root_url
     else 
       render :action => 'new'
     end

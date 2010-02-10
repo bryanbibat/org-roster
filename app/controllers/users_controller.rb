@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_filter :remove_role_from_params
 
   def index
-    @users = User.all(:order => "last_name, first_name")
+    @users = User.all(:order => "nickname, last_name, first_name")
   end
 
   def new
