@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :password_resets
   map.resources :positions
   map.resources :batches
   map.resources :committees, :has_many => :roles

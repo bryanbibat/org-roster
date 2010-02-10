@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100210120935) do
+ActiveRecord::Schema.define(:version => 20100210130111) do
 
   create_table "batches", :force => true do |t|
     t.string   "name"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(:version => 20100210120935) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
+    t.string   "email",                             :null => false
     t.string   "password"
     t.string   "crypted_password"
     t.string   "password_salt"
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(:version => 20100210120935) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
-    t.string   "first_name",        :null => false
-    t.string   "last_name",         :null => false
+    t.string   "first_name",                        :null => false
+    t.string   "last_name",                         :null => false
     t.integer  "batch_id"
     t.integer  "buddy_id"
     t.string   "picture_url"
@@ -80,6 +80,10 @@ ActiveRecord::Schema.define(:version => 20100210120935) do
     t.string   "livejournal"
     t.string   "tumblr"
     t.string   "linkedin"
+    t.string   "perishable_token",  :default => "", :null => false
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token"
 
 end

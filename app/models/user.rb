@@ -43,5 +43,9 @@ class User < ActiveRecord::Base
                       batch.nil? ? 0 : batch.applicant_batch])
   end
 
+  def deliver_password_reset_instructions!  
+    reset_perishable_token!  
+    Notifier.deliver_password_reset_instructions(self)  
+  end  
 
 end
