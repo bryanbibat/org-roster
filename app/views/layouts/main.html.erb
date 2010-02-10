@@ -11,6 +11,9 @@
 <body>
   <div id="margins">
     <div id="header">
+      <div id="app_title">
+        Online Roster <span id="subtitle">(beta)</span>
+      </div>
       <div id="session">
         <% if current_user %>
           Logged in as <%=link_to (h current_user.email), current_user  %> |

@@ -47,8 +47,12 @@
       <td><%=h role.description %></td>
       <td><%=h role.unique %></td>
       <% if current_user.admin? %>
-      <td><%= link_to 'Edit', edit_committee_role_path(@committee, role) %></td>
-      <td><%= link_to 'Destroy', committee_role_path(@committee, role), :confirm => 'Are you sure?', :method => :delete %></td>
+        <td>
+          <%= link_to (image_tag "edit.png", :border => 0, :title => "Edit"), 
+            edit_committee_role_path(@committee, role) %>
+          <%= link_to (image_tag "delete.png", :border => 0, :title => "Delete"), 
+            committee_role_path(@committee, role), :confirm => 'Are you sure?', :method => :delete %>
+        </td>
       <% end %>
     </tr>
   <% end %>
@@ -61,8 +65,8 @@
 </p>
 
 <p> 
-    <td><%= link_to 'Edit', edit_committee_path(@committee) %></td>
-    <td><%= link_to 'Delete', @committee, :confirm => 'Are you sure?', :method => :delete %></td>
+    <%= link_to 'Edit', edit_committee_path(@committee) %> |
+    <%= link_to 'Delete', @committee, :confirm => 'Are you sure?', :method => :delete %> |
   <% end %>
   <%= link_to 'Back', committees_path %>
 </p>

@@ -10,9 +10,12 @@
   <tr>
     <td><%=h system_parameter.code %></td>
     <td><%=h system_parameter.value %></td>
-    <td><%= link_to 'Show', system_parameter %></td>
-    <td><%= link_to 'Edit', edit_system_parameter_path(system_parameter) %></td>
-    <td><%= link_to 'Destroy', system_parameter, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+      <%= link_to (image_tag "edit.png", :border => 0, :title => "Edit"), 
+        edit_system_parameter_path(system_parameter) %>
+      <%= link_to (image_tag "delete.png", :border => 0, :title => "Delete"), 
+        system_parameter, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>

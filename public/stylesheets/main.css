@@ -22,6 +22,18 @@ body {
   height:80px;
 }
 
+#app_title {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  font-size: 250%;
+  font-weight: bold;
+}
+
+#app_title span#subtitle {
+  font-weight: normal;
+  font-size: 70%;
+}
 
 #session {
   position: absolute;

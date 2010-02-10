@@ -72,8 +72,12 @@
       <td><%=link_to (h position.committee.code), position.committee %></td>
       <td><%=h position.role.name %></td>
       <td><%=h position.year %></td>
-      <td><%= link_to 'Edit', edit_user_position_path(@user, position) %></td>
-      <td><%= link_to 'Delete', user_position_path(@user, position), :confirm => 'Are you sure?', :method => :delete %></td>
+      <td>
+        <%= link_to (image_tag "edit.png", :border => 0, :title => "Edit"), 
+          edit_user_position_path(@user, position) %> 
+        <%= link_to (image_tag "delete.png", :border => 0, :title => "Delete"), 
+          user_position_path(@user, position), :confirm => 'Are you sure?', :method => :delete %>
+      </td>
 
     </tr>
   <% end %>
