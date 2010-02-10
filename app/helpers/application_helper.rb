@@ -80,4 +80,10 @@ module ApplicationHelper
       image_tag picture_url
     end
   end
+
+  def user_thumbnail(picture_url)
+    unless picture_url.blank?
+      image_tag picture_url, :size => "32x32"
+    end
+  end
 end

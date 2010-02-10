@@ -20,6 +20,11 @@ class User < ActiveRecord::Base
     "#{last_name}, #{first_name}"
   end
 
+  def roster_display
+    nickname.blank? ? "#{first_name} #{last_name}" :
+       "#{nickname} (#{first_name} #{last_name})"
+  end
+
   def batch_display
     return "" if batch.nil? 
     batch.display_name

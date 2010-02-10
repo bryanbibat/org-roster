@@ -1,4 +1,6 @@
-<h1>Listing committees</h1>
+<% title "Committees" %>
+
+<h1>Listing Committees</h1>
 
 <table>
   <tr>
@@ -16,6 +18,6 @@
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New committee', new_committee_path %>
+<% if current_user.admin? %> 
+  <p><%= link_to 'New committee', new_committee_path %></p>
+<% end %>

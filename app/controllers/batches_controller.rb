@@ -1,4 +1,7 @@
 class BatchesController < ApplicationController
+  before_filter :require_user
+  before_filter :require_admin, :except => [:index]
+
   # GET /batches
   # GET /batches.xml
   def index

@@ -1,9 +1,18 @@
 <% title "List Users" %>
 
 <table id="users">
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Batch</th>
+    <th>Status</th>
+  </tr>
   <% for user in @users %>
-    <tr>
-      <td><%= link_to user.display_name, user_path(user) %></td>
+   <tr>
+      <td><%= user_thumbnail user.picture_url %></td>
+      <td><%= link_to h(user.roster_display), user_path(user) %></td>
+      <td><%=h user.batch_display %></td>
+      <td><%=h user.status %></td>
     </tr>
   <% end %>
 </table>

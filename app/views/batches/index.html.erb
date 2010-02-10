@@ -1,4 +1,6 @@
-<h1>Listing batches</h1>
+<% title "Batches" %>
+
+<h1>Listing Batches</h1>
 
 <table>
   <tr>
@@ -12,13 +14,14 @@
     <td><%=h batch.name %></td>
     <td><%=h batch.applicant_batch %></td>
     <td><%=h batch.year %></td>
-    <td><%= link_to 'Show', batch %></td>
+    <% if current_user.admin? %>
     <td><%= link_to 'Edit', edit_batch_path(batch) %></td>
-    <td><%= link_to 'Destroy', batch, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Delete', batch, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New batch', new_batch_path %>
+<% if current_user.admin? %>
+  <p><%= link_to 'New batch', new_batch_path %></p>
+<% end %>

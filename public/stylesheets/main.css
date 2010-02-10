@@ -29,15 +29,8 @@ body {
   top: 5px;
 }
 
-div#session a {
-  color: #999;
-}
-
-#navigation {
-  padding: 5px 0;
-}
-
 a {
+  color: #3B5998;
   text-decoration: none;
 }
 
@@ -45,15 +38,43 @@ a:hover {
   text-decoration:underline;
 }
 
+div#session a {
+  color: #999;
+}
+
+div#navigation {
+  background: #DDD;
+  padding: 5px 10px;
+}
+
+div#navigation a {
+  font-weight: bold;
+  color: #555;
+}
+
+div#navigation a:hover {
+  color: #FFF;
+  text-decoration: none;
+}
+
+#navigation {
+  padding: 5px 0;
+}
+
 table {
   border-spacing: 0;
 }
 
-tr, td, th {
+table#users tr {
+  height : 32px;
+}
+
+tr {
 }
 
 td, th  {
-  padding: 3px;
+  padding: 3px 10px;
+  border-bottom: solid 1px #DDD;
 }
 
 td.number {

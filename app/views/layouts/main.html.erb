@@ -3,34 +3,35 @@
 <head>
   <title>Online Roster - <%= yield(:title) || "Main" %> </title>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<!-- add your meta tags here -->
-<%= stylesheet_link_tag "main" %>
-<%= javascript_include_tag "jquery-1.4.1.min" %>
+  <!-- add your meta tags here -->
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <%= stylesheet_link_tag "main" %>
+  <%= javascript_include_tag "jquery-1.4.1.min" %>
 </head>
 <body>
   <div id="margins">
-    <div id="page">
-      <div id="header">
-        <div id="session">
-          <% if current_user %>
-            Logged in as <%= current_user.email %> |
-            <%= link_to "Logout", logout_path %>
-          <% else %>
-            <%= link_to "Login", login_path %>
-          <% end %>
-        </div>
-      </div>
-      <div id="navigation">
-        <%= link_to "Home", root_url %>
+    <div id="header">
+      <div id="session">
         <% if current_user %>
-          <%= link_to "Users", users_path %>
-          <%= link_to "Committees", committees_path %>
-          <%= link_to "Batches", batches_path %>
-          <% if current_user.admin? %>
-            <%= link_to "System Parameters", system_parameters_path %>
-          <% end %>
+          Logged in as <%=link_to (h current_user.email), current_user  %> |
+          <%= link_to "Logout", logout_path %>
+        <% else %>
+          <%= link_to "Login", login_path %>
         <% end %>
       </div>
+    </div>
+    <div id="navigation">
+      <%= link_to "Home", root_url %>
+      <% if current_user %>
+        | <%= link_to "Users", users_path %>
+        | <%= link_to "Committees", committees_path %>
+        | <%= link_to "Batches", batches_path %>
+        <% if current_user.admin? %>
+          |  <%= link_to "System Parameters", system_parameters_path %>
+        <% end %>
+      <% end %>
+    </div>
+    <div id="page">
       <div id="breadcrumbs"></div>
       <div id="main">
         <%= flash_messages %> 

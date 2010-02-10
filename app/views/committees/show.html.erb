@@ -1,3 +1,7 @@
+<% title "Committee Details" %>
+
+<h1>Committee Details</h1>
+
 <p>
   <b>Code:</b>
   <%=h @committee.code %>
@@ -24,10 +28,11 @@
   <%=h @committee.description %>
 </p>
 
+<% if current_user.admin? %>
+  <p><%= link_to 'Edit', edit_committee_path(@committee) %> </p>
+<% end %>
 
-<%= link_to 'Edit', edit_committee_path(@committee) %> 
-
-<h1>Listing roles</h1>
+<h1>Committee Roles</h1>
 
 <table>
   <tr>
@@ -41,20 +46,21 @@
       <td><%=h role.name %></td>
       <td><%=h role.description %></td>
       <td><%=h role.unique %></td>
+      <% if current_user.admin? %>
       <td><%= link_to 'Edit', edit_committee_role_path(@committee, role) %></td>
       <td><%= link_to 'Destroy', committee_role_path(@committee, role), :confirm => 'Are you sure?', :method => :delete %></td>
-
+      <% end %>
     </tr>
   <% end %>
 
 </table>
 
 <p>
+  <% if current_user.admin? %>
   <%= link_to 'New role', new_committee_role_path(@committee) %>
 </p>
 
 <p> 
-  <% if current_user.admin? %>
     <td><%= link_to 'Edit', edit_committee_path(@committee) %></td>
     <td><%= link_to 'Delete', @committee, :confirm => 'Are you sure?', :method => :delete %></td>
   <% end %>
