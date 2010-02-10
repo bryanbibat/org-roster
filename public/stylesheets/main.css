@@ -98,6 +98,7 @@ p, dd, dt {
 
 dl {
   display:block;
+  margin:0px;
 }
 
 span.nickname {
@@ -107,18 +108,34 @@ span.nickname {
 
 dt {
   font-weight:bold;
-  width: 200px;
+  width: 180px;
   float: left;
   clear: left;
-  padding: 0 0 5px 0;
+  padding: 3px 0;
 }
 
 dd {
   float: left;
+  padding: 3px 0;
 }
 
 h2 {
+  font-size: 120%;
+  padding-top: 10px;
   clear:left;
+}
+
+h1 {
+  font-size: 120%;
+}
+
+label {
+  font-weight: bold;
+}
+
+span.instruction {
+  font-size: 90%;
+  color: #999;
 }
 
 .notice { background: #efe; color: #040; border: 2px #484 solid; padding: 10px; margin-bottom: 1em; }

@@ -9,18 +9,14 @@
 <% end %>
 </p>
 
+<h2>User Details</h2>
 
 <dl>
   <dt>Other nicknames/aliases: </dt>
   <dd><%=h @user.other_aliases %></dd>
-</dl>
-
-<dl>
   <dt>Email: </dt>
   <dd><%=h @user.email %></dd>
-</dl>
-<dl>
-  <dt>Social Networking sites: </dt>
+  <dt>Social networking sites: </dt>
   <dd>
   <%= facebook_badge(@user.facebook) %>
   <%= twitter_badge(@user.twitter) %>
@@ -30,30 +26,33 @@
   <%= livejournal_badge(@user.livejournal) %>
   <%= linkedin_badge(@user.linkedin) %>
   </dd>
-</dl>
-
-<dl>
   <dt>Batch: </dt>
   <dd><%=h @user.batch_display  %></dd>
-</dl>
 
 <% if !@user.buddy_id.nil? %>
-<dl>
   <dt>Buddy Member: </dt>
   <dd><%= link_to @user.buddy_mem.display_name, @user.buddy_mem  %></dd>
-</dl>
 <% end %>
+</dl>
 
 <% if @user.buddy_apps.count > 0 %>
 <h2>Buddy Apps</h2>
 
-  <table id="users">
-    <% for user in @user.buddy_apps %>
-      <tr>
-        <td><%= link_to user.display_name, user_path(user) %></td>
-      </tr>
-
-    <% end %>
+<table id="users">
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Batch</th>
+    <th>Status</th>
+  </tr>
+  <% for user in @user.buddy_apps %>
+    <tr>
+      <td><%= user_thumbnail user.picture_url %></td>
+      <td><%= link_to h(user.roster_display), user_path(user) %></td>
+      <td><%=h user.batch_display %></td>
+      <td><%=h user.status %></td>
+    </td>
+  <% end %>
   </table>
 
 <% end %>
@@ -71,7 +70,7 @@
     <tr>
       <td><%=link_to (h position.committee.code), position.committee %></td>
       <td><%=h position.role.name %></td>
-      <td><%=h position.year %></td>
+      <td><%=academic_year position.year %></td>
       <td>
         <%= link_to (image_tag "edit.png", :border => 0, :title => "Edit"), 
           edit_user_position_path(@user, position) %> 

@@ -28,14 +28,14 @@
     <%= f.text_field :last_name %>
   </p>
   <p>
-    <%= f.label :other_aliases  %><br />
+    <%= f.label :other_aliases, "Other aliases and online handles"  %><br />
     <%= f.text_area :other_aliases, :size => "72x6" %>
   </p>
   <p>
-    <%= f.label :picture_url %><br />
+    <%= f.label :picture_url, "Picture URL" %><br />
     <%= f.text_field :picture_url, :size => 100 %><br />
     <span class="instruction">Please provide the URL for a picture, preferrably
-      a square pic less than 100KB in size (a "real" pic, para makilala kayo 
+      a square pic less than 50KB in size (a "real" pic, para makilala kayo 
       ng ibang users pag nakita kayo in person). You can use sites like 
       <%= link_to "ImageShack", "http://www.imageshack.com/" %> and 
       <%= link_to "Photobucket", "http://www.photobucket.com/" %> to upload 
@@ -84,7 +84,7 @@
   <p>
     <%= f.label :linkedin %><br />
     <%= f.text_field :linkedin, :size => 60 %><br /> 
-    <span class="instruction">provide the url to your public profile e.g. http://ph.linkedin.com/in/bryanbibat</span>
+    <span class="instruction">Provide the url to your public profile e.g. http://ph.linkedin.com/in/bryanbibat</span>
   </p>
  
   <p><%= f.submit "Submit" %></p>

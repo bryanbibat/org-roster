@@ -1,4 +1,6 @@
-<% title "List Users" %>
+<% title "Users" %>
+
+<h1>User List</h1>
 
 <table id="users">
   <tr>
@@ -12,7 +14,7 @@
       <td><%= user_thumbnail user.picture_url %></td>
       <td><%= link_to h(user.roster_display), user_path(user) %></td>
       <td><%=h user.batch_display %></td>
-      <td><%=h user.status %></td>
+      <td><%=h user.status %><%= user.admin? ? ", Site Admin" : "" %></td>
     </tr>
   <% end %>
 </table>
