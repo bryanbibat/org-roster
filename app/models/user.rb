@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   end
 
   def roster_display
+    return nickname if first_name.blank? && last_name.blank?
     nickname.blank? ? "#{first_name} #{last_name}" :
        "#{nickname} (#{first_name} #{last_name})"
   end
@@ -34,18 +35,17 @@ class User < ActiveRecord::Base
     User.exists?(:role => 'A')
   end
 
-  def possible_buddies
-    
-    User.find_by_sql(["SELECT * FROM users " + 
-                      "WHERE EXISTS (SELECT 1 FROM batches WHERE " + 
-                      "users.batch_id = batches.id " + 
-                      "AND batches.applicant_batch < ?)",
-                      batch.nil? ? 0 : batch.applicant_batch])
-  end
-
   def deliver_password_reset_instructions!  
     reset_perishable_token!  
     Notifier.deliver_password_reset_instructions(self)  
   end  
 
+  def self.possible_buddies(batch_id)
+    User.all(:conditions => ["EXISTS (SELECT 1 FROM batches WHERE " + 
+        "users.batch_id = batches.id " + 
+        "AND batches.applicant_batch < ?)",
+        batch_id.blank? ? 0 : Batch.find(batch_id).applicant_batch])
+  end
+
+  
 end

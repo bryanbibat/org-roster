@@ -54,7 +54,7 @@
   </p>
   <p>
     <%= f.label :buddy_id, "Buddy" %><br />
-    <%= collection_select(:user, :buddy_id, @user.possible_buddies, :id, :display_name) %>
+    <%= collection_select(:user, :buddy_id, @possible_buddies, :id, :roster_display) %>
   </p>
   <p>
     <%= f.label :facebook %><br />

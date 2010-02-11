@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :password_resets
   map.resources :positions
-  map.resources :batches
+  map.resources :batches, :member => { :possible_buddies => :get }
   map.resources :committees, :has_many => :roles
 
   map.resources :system_parameters

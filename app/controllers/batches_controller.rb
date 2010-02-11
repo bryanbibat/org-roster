@@ -85,4 +85,11 @@ class BatchesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def possible_buddies
+    @buddies = User.possible_buddies(params[:id]).sort_by { |user| user.roster_display }
+    respond_to do |format|
+      format.xml { render :xml => @buddies }
+    end
+  end
 end

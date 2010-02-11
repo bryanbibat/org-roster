@@ -1,0 +1,30 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("#user_batch_id").change( populateBuddies ) 
+  })
+
+
+  function populateBuddies() {
+    $.get("/batches/" + $("#user_batch_id").val() + "/possible_buddies.xml", {}, function(xml) {
+        var options = '<option value ="">-- choose one below --</option>';
+      $("user", xml).each(function() {
+        options += '<option value ="' + $(this).find('id').text() + '">' +
+        rosterDisplay($(this).find('nickname').text(), 
+          $(this).find('first-name').text(), 
+          $(this).find('last-name').text()) + 
+        '</option>';
+        })
+      $("select#user_buddy_id").html(options);
+    })
+  }
+
+  function rosterDisplay(nickname, firstName, lastName) {
+    if (nickname == null || nickname == "") {
+      return firstName + " " + lastName;
+    } else {
+      return nickname + " (" + firstName + " " + lastName + ")";
+    }
+  }
+
+
+</script>

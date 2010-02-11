@@ -11,7 +11,8 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @batches = Batch.all(:order => "applicant_batch")
-  end
+    @possible_buddies = []
+ end
 
   def show
     @user = User.find(params[:id])
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
       redirect_to user_url(@user)
     else
       @batches = Batch.all(:order => "applicant_batch")
+      @possible_buddies = possible_buddies
       render :action => 'new'
     end
   end
@@ -33,6 +35,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @batches = Batch.all(:order => "applicant_batch")
+    @possible_buddies = possible_buddies
   end
   
   def update
@@ -42,6 +45,7 @@ class UsersController < ApplicationController
       redirect_to user_url(@user)
     else
       @batches = Batch.all(:order => "applicant_batch")
+      @possible_buddies = possible_buddies
       render :action => 'edit'
     end
   end
@@ -82,5 +86,10 @@ class UsersController < ApplicationController
       if !current_user.admin? && !params[:user].nil?
         params[:user].delete(:role)
       end
+    end
+
+    def possible_buddies
+      [User.new(:nickname => '-- choose one below --')] + 
+      User.possible_buddies(@user.batch_id).sort_by { |user| user.roster_display }
     end
 end
