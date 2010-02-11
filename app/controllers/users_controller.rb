@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   before_filter :remove_role_from_params
 
   def index
-    @users = User.all.sort_by { |user| user.roster_display }
+    @users = User.all(:conditions => process_query).sort_by { |user| user.roster_display }
+    @batches = Batch.all(:order => "applicant_batch")
   end
 
   def new
@@ -91,5 +92,23 @@ class UsersController < ApplicationController
     def possible_buddies
       [User.new(:nickname => '-- choose one below --')] + 
       User.possible_buddies(@user.batch_id).sort_by { |user| user.roster_display }
+
+    end
+
+    def statuses
+      ["Member", "Alumni", "Inactive Alumni"]
+    end
+
+    def process_query
+      conditions = []
+      conditions << "status = ?" if params.has_key?(:status) && !statuses.index(params[:status]).nil? 
+      conditions << "batch_id = ?" if params.has_key?(:batch_id) && params[:batch_id].to_i != 0
+      parameters = []
+      parameters << params[:status] if params.has_key?(:status) && !statuses.index(params[:status]).nil?
+      parameters << params[:batch_id].to_i if params.has_key?(:batch_id) && params[:batch_id].to_i != 0
+      
+      return [ conditions.join(" and ") ] + parameters if parameters.size > 0
+
+      []
     end
 end

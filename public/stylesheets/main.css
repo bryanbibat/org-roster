@@ -77,6 +77,10 @@ table {
   border-spacing: 0;
 }
 
+caption {
+  text-align: left;
+}
+
 table#users tr {
   height : 32px;
 }
