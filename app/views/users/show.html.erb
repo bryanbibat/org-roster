@@ -16,6 +16,8 @@
   <dd><%=h @user.other_aliases %></dd>
   <dt>Email: </dt>
   <dd><%=h @user.email %></dd>
+  <dt>Website: </dt>
+  <dd><%= link_to(@user.website, @user.website) if !@user.website.blank?  %></dd>
   <dt>Social networking sites: </dt>
   <dd>
   <%= facebook_badge(@user.facebook) %>
@@ -31,7 +33,7 @@
 
 <% if !@user.buddy_id.nil? %>
   <dt>Buddy Member: </dt>
-  <dd><%= link_to @user.buddy_mem.display_name, @user.buddy_mem  %></dd>
+  <dd><%= link_to @user.buddy_mem.roster_display, @user.buddy_mem  %></dd>
 <% end %>
 </dl>
 

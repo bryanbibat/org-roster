@@ -57,6 +57,10 @@
     <%= collection_select(:user, :buddy_id, @possible_buddies, :id, :roster_display) %>
   </p>
   <p>
+    <%= f.label :website %><br />
+    <%= f.text_field :website %>
+  </p>
+  <p>
     <%= f.label :facebook %><br />
     <%= f.text_field :facebook %><br /> 
     <span class="instruction">Use either your Username (e.g. http://www.facebook.com/<strong>bryanbibat</strong>) or profile ID (e.g. http://www.facebook.com/profile.php?id=<strong>753408797</strong>)</span>

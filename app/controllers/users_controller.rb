@@ -103,11 +103,14 @@ class UsersController < ApplicationController
       conditions = []
       conditions << "status = ?" if params.has_key?(:status) && !statuses.index(params[:status]).nil? 
       conditions << "batch_id = ?" if params.has_key?(:batch_id) && params[:batch_id].to_i != 0
+      conditions << "role <> 'A'" if params.has_key?(:admin) && params[:admin] != 'A'
+      conditions << "role = 'A'" if params.has_key?(:admin) && params[:admin] == 'A'
+
       parameters = []
       parameters << params[:status] if params.has_key?(:status) && !statuses.index(params[:status]).nil?
       parameters << params[:batch_id].to_i if params.has_key?(:batch_id) && params[:batch_id].to_i != 0
       
-      return [ conditions.join(" and ") ] + parameters if parameters.size > 0
+      return [ conditions.join(" and ") ] + parameters if conditions.size > 0
 
       []
     end

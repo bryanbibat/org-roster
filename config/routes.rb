@@ -13,6 +13,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :user_sessions
   map.resource :account
 
+  map.readme "readme", :controller => "pages", :action => "readme"
+
   map.root :controller => "pages", :action => "main"
 
 end
