@@ -1,0 +1,37 @@
+<h2>README</h2>
+
+<p>This is a prototype of a proposed online roster system for UP AME.</p>
+
+<p>I have a couple of reasons:</p>
+
+<ul>
+  <li>Almost 10 years of existence and 9 batches of applicants means that no single member or alumni knows who's really an inducted member of UP AME. An easily accessible site (like the <a href="http://wiki.bryanbibat.com/">AME roll call wiki</a>) would help peoplei know who's who inside the org.</li>
+  <li>There are a lot of things you can do with roster data in a web application (e.g. linking members to buddies and committees) than those in spreadsheets</li>
+  <li>I get to practice <a href="http://en.wikipedia.org/wiki/Behavior_Driven_Development">BDD</a> in <a href="http://rubyonrails.org/">RoR</a>.</li>
+</ul>
+
+At this point, I'd like to point out what this site <strong><em>ISN'T</em></strong>:
+
+<ul>
+  <li><em>a place to post news related to the org</em> - We've got the org mailing lists for that.</li>
+  <li><em>a mini-Facebook (or similar social networking site)</em> - This is just a roster; for social networking needs, you can edit your profile to add links to your Facebook, Twitter, Multiply, etc. accounts.</li>
+</ul>
+
+<p>Another thing to point out that this site behaves like a <strong>wiki</strong> in that anyone can edit anyone's data. There are, of course, some exceptions like creating users or editing e-mail addresses which are reserved for the admin.</p>
+
+<p>As some of you might know, wikis nowadays tend to attract drama. While minimalist design (i.e. as little <em>factual</em> info as possible, no "testimonials" or "walls" or other stuff) should prevent drama in this site, there are still ways to vandalize profiles. That said, I'd like to request that regardless of what beef you have with a mem, whether that mem still won't pay his 1,000 peso debt or that alumni made you cry in the induction, <em>please don't anything crazy</em> like changing their pictures to goatse. It would make life a lot better for all of us. :D</p>
+
+<p>For missing members or other concerns like requests to change e-mail addresses, just contact the site <%= link_to "admins", users_path + "?admin=A" %>.</p>
+
+<p>Technical stuff ahead. Stop reading if you're prone to getting nosebleeds from those kind of stuff.</p>
+
+<h2>Technical Stuff</h2>
+
+<p>Since this is just a prototype (and a practice for BDD), I chose to use Ruby on Rails (RoR) and host this on Heroku. I plan to port this over to PHP and install it at UP-AME.org once people decide it's good enough.</p>
+
+<p>One downside of getting it hosted in Heroku is the 5MB database limit. We can't upload pictures per member because of this and so we have to rely on image hosting sites.</p>
+
+<p>Since this is just a prototype, I didn't bother hardening the site from malicious attacks. Aside from the login, there are no other security features in this site so please don't try to hack/break the site.</p>
+
+<p>Interested graphic designers and back-end programmers who want to help out can contact me through e-mail (bryan.bibat@gmail.com). Don't worry about the weird platform; Rails isn't that hard to learn and I could teach you guys the basics in a day.</p> 
+
