@@ -14,6 +14,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account
 
   map.readme "readme", :controller => "pages", :action => "readme"
+  map.resources :reports, :collection => { :members => :get, :alumni => :get, :complete => :get }
 
   map.root :controller => "pages", :action => "main"
 

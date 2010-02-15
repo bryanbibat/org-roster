@@ -31,6 +31,7 @@
         | <%= link_to "Batches", batches_path %>
         <% if current_user.admin? %>
           |  <%= link_to "System Parameters", system_parameters_path %>
+          |  <%= link_to "Reports", reports_path %>
         <% end %>
       <% end %>
     </div>
