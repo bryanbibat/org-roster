@@ -44,8 +44,8 @@ describe AccountsController, "POST create" do
   it "should redirect to login page when an account is successfully created" do
     @user.stub!(:save).and_return true
     post :create
-    response.should redirect_to(login_url)
-    flash[:notice].should == "New account created. You can now login with the new account's credentials."
+    response.should redirect_to(root_url)
+    flash[:notice].should == "New account created and automatically logged in."
   end
 
   it "should not redirect if there is an error in the entered values" do

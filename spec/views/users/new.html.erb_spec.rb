@@ -4,6 +4,8 @@ describe "users/new.html.erb" do
   before(:each) do
     @user = mock_model(User, :null_object => true).as_new_record 
     assigns[:user] = @user 
+    assigns[:batches] = [Batch.new(:year => 2000, :applicant_batch => 0, :name => "Founding")]
+    assigns[:possible_buddies] = []
   end
   
   it "should display a create user form" do

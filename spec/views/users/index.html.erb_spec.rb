@@ -4,9 +4,17 @@ describe "users/index.html.erb" do
 
   before(:each) do
     @users = []
-    @users << User.new(:last_name => "Allen", :first_name => "Alice")
-    @users << User.new(:last_name => "Doe", :first_name => "John")
+    @users << mock_model(User, :last_name => "Allen", :first_name => "Alice", 
+                         :picture_url => "", :roster_display => "Alice Allen", 
+                         :batch_display => " ", :status => "Member",
+                         :admin? => false)
+    @users << mock_model(User, :last_name => "Doe", :first_name => "John", 
+                         :picture_url => "", :roster_display => "John Doe",
+                         :batch_display => " ", :status => "Alumni",
+                         :admin? => true)
+    @batches = [Batch.new(:year => 2000, :applicant_batch => 0, :name => "Founding")]
     assigns[:users] = @users
+    assigns[:batches] = @batches
   end
 
   context "admin" do
@@ -23,8 +31,8 @@ describe "users/index.html.erb" do
    
     it "should display a table of data" do
       render "users/index.html.erb"
-      response.should contain("Allen, Alice")
-      response.should contain("Doe, John")
+      response.should contain("Alice Allen")
+      response.should contain("John Doe")
     end
   end
 
