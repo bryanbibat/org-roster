@@ -6,7 +6,7 @@ describe Role do
       :name => "value for name",
       :committee_id => 1,
       :description => "value for description",
-      :unique => false
+      :execom => false
     }
   end
 
