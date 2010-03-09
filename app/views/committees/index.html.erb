@@ -14,7 +14,7 @@
     <td><%=link_to (h committee.code), committee %></td>
     <td><%=h committee.full_name %></td>
     <td><%= "#{committee.year_added} - #{committee.year_removed ||= "present"}" %></td>
-    <% if current_user.admin? %>
+    <% if @current_user.admin? %>
       <td>
         <%= link_to (image_tag "edit.png", :border => 0, :title => "Edit"),
           edit_committee_path(committee) %>
@@ -26,6 +26,6 @@
 <% end %>
 </table>
 
-<% if current_user.admin? %> 
+<% if @current_user.admin? %> 
   <p><%= link_to 'New committee', new_committee_path %></p>
 <% end %>

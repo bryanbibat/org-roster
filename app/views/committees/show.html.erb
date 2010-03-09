@@ -28,7 +28,7 @@
   <%=h @committee.description %>
 </p>
 
-<% if current_user.admin? %>
+<% if @current_user.admin? %>
   <p><%= link_to 'Edit', edit_committee_path(@committee) %> </p>
 <% end %>
 
@@ -46,7 +46,7 @@
       <td><%=h role.name %></td>
       <td><%=h role.description %></td>
       <td><%=h role.execom %></td>
-      <% if current_user.admin? %>
+      <% if @current_user.admin? %>
         <td>
           <%= link_to (image_tag "edit.png", :border => 0, :title => "Edit"), 
             edit_committee_role_path(@committee, role) %>
@@ -60,7 +60,7 @@
 </table>
 
 <p>
-  <% if current_user.admin? %>
+  <% if @current_user.admin? %>
   <%= link_to 'New role', new_committee_role_path(@committee) %>
 </p>
 
