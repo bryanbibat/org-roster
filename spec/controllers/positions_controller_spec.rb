@@ -6,26 +6,37 @@ describe PositionsController do
     @mock_position ||= mock_model(Position, stubs)
   end
 
-  describe "GET index" do
-    it "assigns all positions as @positions" do
-      Position.stub(:find).with(:all).and_return([mock_position])
-      get :index
-      assigns[:positions].should == [mock_position]
-    end
+  def mock_committee(stubs={})
+    @mock_committee ||= mock_model(Committee, stubs)
   end
 
-  describe "GET show" do
-    it "assigns the requested position as @position" do
-      Position.stub(:find).with("37").and_return(mock_position)
-      get :show, :id => "37"
-      assigns[:position].should equal(mock_position)
-    end
+  def mock_child(stubs={})
+    @mock_child ||= mock_model(Position, stubs)
+  end
+
+  def mock_role(stubs={})
+    @mock_role ||= mock_model(Role, stubs)
+  end
+
+  before(:each) do
+    #TODO spec login
+    @user = Factory(:user)
+    controller.stub!(:current_user).and_return @user
+
+    User.stub(:find).and_return(@user)
+    @user.stub!(:positions).and_return(mock_child)
+    Committee.stub(:all).and_return([mock_committee])
+    mock_committee.stub(:roles).and_return([mock_role])
+    SystemParameter.stub(:find_by_code).with("year_founded").and_return(
+      mock_model(SystemParameter, :value => 2000 ))
+    mock_position.stub(:user).and_return(@user)
+    mock_position.stub(:committee).and_return(mock_committee)
   end
 
   describe "GET new" do
     it "assigns a new position as @position" do
-      Position.stub(:new).and_return(mock_position)
-      get :new
+      mock_child.stub(:build).and_return(mock_position)
+      get :new, :user_id => "1"
       assigns[:position].should equal(mock_position)
     end
   end
@@ -33,7 +44,7 @@ describe PositionsController do
   describe "GET edit" do
     it "assigns the requested position as @position" do
       Position.stub(:find).with("37").and_return(mock_position)
-      get :edit, :id => "37"
+      get :edit, :id => "37", :user_id => "1"
       assigns[:position].should equal(mock_position)
     end
   end
@@ -42,27 +53,31 @@ describe PositionsController do
 
     describe "with valid params" do
       it "assigns a newly created position as @position" do
-        Position.stub(:new).with({'these' => 'params'}).and_return(mock_position(:save => true))
-        post :create, :position => {:these => 'params'}
+        mock_child.stub(:build).with({'these' => 'params'}).and_return(mock_position)
+        mock_position.stub(:save).and_return(true)
+        post :create, :position => {:these => 'params'}, :user_id => "1"
         assigns[:position].should equal(mock_position)
       end
 
       it "redirects to the created position" do
-        Position.stub(:new).and_return(mock_position(:save => true))
-        post :create, :position => {}
-        response.should redirect_to(position_url(mock_position))
+        mock_child.stub(:build).and_return(mock_position)
+        mock_position.stub(:save).and_return(true)
+        post :create, :position => {}, :user_id => 1
+        response.should redirect_to(user_url(@user))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved position as @position" do
-        Position.stub(:new).with({'these' => 'params'}).and_return(mock_position(:save => false))
+        mock_child.stub(:build).with({'these' => 'params'}).and_return(mock_position)
+        mock_position.stub(:save).and_return(false)
         post :create, :position => {:these => 'params'}
         assigns[:position].should equal(mock_position)
       end
 
       it "re-renders the 'new' template" do
-        Position.stub(:new).and_return(mock_position(:save => false))
+        mock_child.stub(:build).and_return(mock_position)
+        mock_position.stub(:save).and_return(false)
         post :create, :position => {}
         response.should render_template('new')
       end
@@ -80,15 +95,17 @@ describe PositionsController do
       end
 
       it "assigns the requested position as @position" do
-        Position.stub(:find).and_return(mock_position(:update_attributes => true))
-        put :update, :id => "1"
+        Position.stub(:find).and_return(mock_position)
+        mock_position.stub(:update_attributes).and_return(true)
+        put :update, :id => "1", :user_id => 1
         assigns[:position].should equal(mock_position)
       end
 
       it "redirects to the position" do
-        Position.stub(:find).and_return(mock_position(:update_attributes => true))
-        put :update, :id => "1"
-        response.should redirect_to(position_url(mock_position))
+        Position.stub(:find).and_return(mock_position)
+        mock_position.stub(:update_attributes).and_return(true)
+        put :update, :id => "1", :user_id => 1
+        response.should redirect_to(user_url(@user))
       end
     end
 
@@ -100,14 +117,16 @@ describe PositionsController do
       end
 
       it "assigns the position as @position" do
-        Position.stub(:find).and_return(mock_position(:update_attributes => false))
-        put :update, :id => "1"
+        Position.stub(:find).and_return(mock_position)
+        mock_position.stub(:update_attributes).and_return(false)
+        put :update, :id => "1", :user_id => 1, :position => {}
         assigns[:position].should equal(mock_position)
       end
 
       it "re-renders the 'edit' template" do
-        Position.stub(:find).and_return(mock_position(:update_attributes => false))
-        put :update, :id => "1"
+        Position.stub(:find).and_return(mock_position)
+        mock_position.stub(:update_attributes).and_return(false)
+        put :update, :id => "1", :user_id => 1, :position => {}
         response.should render_template('edit')
       end
     end
@@ -122,9 +141,10 @@ describe PositionsController do
     end
 
     it "redirects to the positions list" do
-      Position.stub(:find).and_return(mock_position(:destroy => true))
+      Position.stub(:find).and_return(mock_position)
+      mock_position.stub(:destroy).and_return(true)
       delete :destroy, :id => "1"
-      response.should redirect_to(positions_url)
+      response.should redirect_to(user_url(@user))
     end
   end
 

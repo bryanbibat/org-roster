@@ -1,5 +1,6 @@
 class PositionsController < ApplicationController
   before_filter :set_years
+  before_filter :require_user
 
   # GET /positions/new
   # GET /positions/new.xml
@@ -52,11 +53,12 @@ class PositionsController < ApplicationController
   # PUT /positions/1.xml
   def update
     @position = Position.find(params[:id])
+    user = @position.user  
 
     respond_to do |format|
       if @position.update_attributes(params[:position])
         flash[:notice] = 'Position was successfully updated.'
-        format.html { redirect_to(@user) }
+        format.html { redirect_to(user_path(user)) }
         format.xml  { head :ok }
       else
         @committees = Committee.all(:order => :code)
@@ -75,10 +77,11 @@ class PositionsController < ApplicationController
   # DELETE /positions/1.xml
   def destroy
     @position = Position.find(params[:id])
+    user = @position.user
     @position.destroy
 
     respond_to do |format|
-      format.html { redirect_to(@user) }
+      format.html { redirect_to(user) }
       format.xml  { head :ok }
     end
   end

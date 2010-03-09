@@ -9,20 +9,21 @@
 
   <p>
     <%= f.label :user %><br />
-    <%= f.text_field :user %>
+    <%=h @user.email %>
   </p>
   <p>
     <%= f.label :committee %><br />
-    <%= f.text_field :committee %>
+    <%= collection_select(:position, :committee_id, @committees, :id, :code) %>
   </p>
   <p>
     <%= f.label :role %><br />
-    <%= f.text_field :role %>
+    <%= collection_select(:position, :role_id, @roles, :id, :name) %>
   </p>
   <p>
     <%= f.label :year %><br />
-    <%= select_academic_year :year, 2000, 2010 %>
+    <%= select_academic_year :position, :year, @year_founded, @current_academic_year %>
   </p>
+
   <p>
     <%= f.submit 'Update' %>
   </p>
