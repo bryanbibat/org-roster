@@ -6,17 +6,26 @@ describe CommitteesController do
     @mock_committee ||= mock_model(Committee, stubs)
   end
 
+  #TODO test admin role
+
+  before(:each) do
+    @user = Factory(:user, :role => "A")
+    controller.stub!(:current_user).and_return @user
+  end
+
   describe "GET index" do
     it "assigns all committees as @committees" do
-      Committee.stub(:find).with(:all).and_return([mock_committee])
+      Committee.stub(:find).and_return([mock_committee])
       get :index
-      assigns[:committees].should == [mock_committee]
+      # there's a union between active and inactive committees
+      assigns[:committees].should == [mock_committee, mock_committee]
     end
   end
 
   describe "GET show" do
     it "assigns the requested committee as @committee" do
       Committee.stub(:find).with("37").and_return(mock_committee)
+      mock_committee.should_receive(:roles).and_return([])
       get :show, :id => "37"
       assigns[:committee].should equal(mock_committee)
     end

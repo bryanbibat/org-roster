@@ -18,4 +18,12 @@ class Committee < ActiveRecord::Base
       !year_removed.blank? && (!year_added.blank? && year_removed < year_added)
   end
 
+  after_create :add_default_members
+
+  def add_default_members
+    head = self.roles.build(:name => "Head", :description => "The head of the committee", :execom => true)
+    head.save
+    mem = self.roles.build(:name => "Member", :description => "A member of the committee", :execom => false)
+    mem.save
+  end
 end

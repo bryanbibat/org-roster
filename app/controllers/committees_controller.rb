@@ -48,11 +48,6 @@ class CommitteesController < ApplicationController
 
     respond_to do |format|
       if @committee.save
-        @committee.reload
-        head = @committee.roles.build(:name => "Head", :description => "The head of the committee", :execom => true)
-        head.save
-        mem = @committee.roles.build(:name => "Member", :description => "A member of the committee", :execom => false)
-        mem.save
         flash[:notice] = 'Committee was successfully created.'
         format.html { redirect_to(@committee) }
         format.xml  { render :xml => @committee, :status => :created, :location => @committee }

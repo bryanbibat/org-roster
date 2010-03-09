@@ -6,6 +6,14 @@ describe SystemParametersController do
     @mock_system_parameter ||= mock_model(SystemParameter, stubs)
   end
 
+  #TODO test admin role
+
+  before(:each) do
+    @user = Factory(:user, :role => "A")
+    controller.stub!(:current_user).and_return @user
+  end
+
+
   describe "GET index" do
     it "assigns all system_parameters as @system_parameters" do
       SystemParameter.stub(:find).with(:all).and_return([mock_system_parameter])
