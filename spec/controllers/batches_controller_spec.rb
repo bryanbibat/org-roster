@@ -6,6 +6,13 @@ describe BatchesController do
     @mock_batch ||= mock_model(Batch, stubs)
   end
 
+  #TODO test admin role
+
+  before(:each) do
+    @user = Factory(:user, :role => "A")
+    controller.stub!(:current_user).and_return @user
+  end
+
   describe "GET index" do
     it "assigns all batches as @batches" do
       Batch.stub(:find).with(:all).and_return([mock_batch])
@@ -50,7 +57,7 @@ describe BatchesController do
       it "redirects to the created batch" do
         Batch.stub(:new).and_return(mock_batch(:save => true))
         post :create, :batch => {}
-        response.should redirect_to(batch_url(mock_batch))
+        response.should redirect_to(batches_url)
       end
     end
 
@@ -88,7 +95,7 @@ describe BatchesController do
       it "redirects to the batch" do
         Batch.stub(:find).and_return(mock_batch(:update_attributes => true))
         put :update, :id => "1"
-        response.should redirect_to(batch_url(mock_batch))
+        response.should redirect_to(batches_url)
       end
     end
 

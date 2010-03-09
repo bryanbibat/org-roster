@@ -14,7 +14,7 @@
     <td><%=h batch.name %></td>
     <td><%=h batch.applicant_batch %></td>
     <td><%=h batch.year %></td>
-    <% if current_user.admin? %>
+    <% if @current_user.admin? %>
       <td>
         <%= link_to (image_tag "edit.png", :border => 0, :title => "Edit"), 
           edit_batch_path(batch) %>
@@ -26,6 +26,6 @@
 <% end %>
 </table>
 
-<% if current_user.admin? %>
+<% if @current_user.admin? %>
   <p><%= link_to 'New batch', new_batch_path %></p>
 <% end %>

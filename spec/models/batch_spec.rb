@@ -4,7 +4,7 @@ describe Batch do
   before(:each) do
     @valid_attributes = {
       :name => "value for name",
-      :order => 1,
+      :applicant_batch => 1,
       :year => 1
     }
   end

@@ -16,6 +16,7 @@ describe "/batches/index.html.erb" do
         :year => 1
       )
     ]
+    @current_user.stub!(:admin?).and_return(true)
   end
 
   it "renders a list of batches" do
