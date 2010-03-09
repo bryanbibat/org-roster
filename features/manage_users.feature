@@ -34,12 +34,13 @@ Feature: Manage Users
 
   Scenario: View list of users
     Given the following users exist
-      | last_name | first_name | email         | password |
-      | Doe       | John       | admin@xyz.com | secret   |
-      | Allen     | Alice      | alice@xyz.com | secret   |
+      | last_name | first_name | email         | password | nickname | status |
+      | Doe       | John       | admin@xyz.com | secret   | JD       | Alumni |
+      | Allen     | Alice      | alice@xyz.com | secret   |          | Member |
     When I login as "alice@xyz.com" with password "secret"
     And I go to the list users page
     Then I should see users table
-      | Allen, Alice | 
-      | Doe, John    |
+      | | Name          | Batch | Status             |
+      | | Alice Allen   |       | Member             |
+      | | JD (John Doe) |       | Alumni, Site Admin | 
 

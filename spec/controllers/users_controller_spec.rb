@@ -50,7 +50,7 @@ describe UsersController, "check admin" do
     it "should not be able to create new user" do
       get :new
       response.should be_redirect
-      flash[:notice].should == "You must be an admin to view this page."
+      flash[:notice].should == "You must be an admin to access this page."
     end
   end
   
@@ -58,12 +58,12 @@ end
 
 describe UsersController, "GET index" do
   before(:each) do
-    @user = mock_model(User, :save => nil, :admin? => false)
+    @user = mock_model(User, :save => nil, :admin? => false, :roster_display => "")
     controller.stub!(:current_user).and_return @user
   end
 
   it "should retrieve records from db" do
-    users = [mock_model(User), mock_model(User)]
+    users = [@user, mock_model(User, :roster_display => "")]
     User.should_receive(:find).and_return(users)
     get :index
     response.should be_success
@@ -75,8 +75,9 @@ describe UsersController, "POST create" do
   #TODO integrate_view
 
   before(:each) do 
-    @user = mock_model(User, :save => nil, :id => 1, :admin? => true)
+    @user = mock_model(User, :save => nil, :id => 1, :admin? => true, :batch_id => 0)
     User.stub!(:new).and_return @user
+    User.stub!(:possible_buddies).and_return []
     controller.stub!(:current_user).and_return @user
   end
   
@@ -102,8 +103,9 @@ describe UsersController, "POST update" do
   
 
   before(:each) do 
-    @user = mock_model(User, :update_attributes => nil)
+    @user = mock_model(User, :update_attributes => nil, :batch_id => 0)
     User.stub!(:find).and_return @user
+    User.stub!(:possible_buddies).and_return []
     controller.stub!(:current_user).and_return mock_model(User, :id => 1, :admin? => true)
   end
   
@@ -113,20 +115,15 @@ describe UsersController, "POST update" do
     response.should render_template(:edit)
   end
 
-  it "edit action should redirect to user's account if user's own record is clicked" do
-    get :edit, :id => 1
-    response.should redirect_to(edit_account_url)
-  end
-  
   it "update action should render edit template when model is invalid" do
     @user.stub!(:valid?).and_return false
-    put :update
+    put :update, :id => 1
     response.should render_template(:edit)
   end
   
   it "update action should redirect when model is valid" do
     @user.stub!(:update_attributes).and_return true 
-    put :update
+    put :update, :id => 1
     response.should redirect_to(user_url(@user))
   end
 end
