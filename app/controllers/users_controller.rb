@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @batches = Batch.all(:order => "applicant_batch")
-    @positions = @user.positions
+    @positions = @user.positions.sort_by { |position| position.year }
   end
   
   def create
