@@ -47,7 +47,7 @@
     <th>Batch</th>
     <th>Status</th>
   </tr>
-  <% for user in @user.buddy_apps %>
+  <% for user in @user.buddy_apps.sort_by { |app| app.batch_id } %>
     <tr>
       <td><%= user_thumbnail user.picture_url %></td>
       <td><%= link_to h(user.roster_display), user_path(user) %></td>
