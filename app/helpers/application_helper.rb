@@ -28,7 +28,7 @@ module ApplicationHelper
   def select_academic_year(model, name, start_year, end_year)
     options = start_year > end_year ? [] :
       (start_year..end_year).map { |year| ["AY #{year} - #{year + 1}", year] }
-    select model, name, options_for_select(options)
+    select model, name, options
   end
 
   def academic_year(year) 
