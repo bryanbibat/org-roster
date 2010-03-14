@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_filter :remove_role_from_params
 
   def index
-    @users = User.all(:conditions => process_query).sort_by { |user| user.roster_display }
+    @users = User.all(:conditions => process_query).sort_by { |user| user.roster_display.upcase }
     @batches = Batch.all(:order => "applicant_batch")
   end
 
@@ -91,7 +91,7 @@ class UsersController < ApplicationController
 
     def possible_buddies
       [User.new(:nickname => '-- choose one below --')] + 
-      User.possible_buddies(@user.batch_id).sort_by { |user| user.roster_display }
+      User.possible_buddies(@user.batch_id).sort_by { |user| user.roster_display.upcase }
 
     end
 
