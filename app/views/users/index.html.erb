@@ -9,6 +9,10 @@
 
 <h1>User List</h1>
 
+<% if @current_user.admin? %>
+  <p><%= link_to "New User", new_user_path %></p>
+<% end %>
+
 <p>Filters</p>
 
 <% form_tag users_path, :method => :get do %>
@@ -22,8 +26,6 @@
   <%= select_tag(:batch_id, options_for_select([["-- don't filter --", ""]] +  @batches.map { |batch| [batch.display_name_long, batch.id] }, params[:batch_id].to_i)) %><br />
   </p>
 <% end %>
-
-
 
 <table id="users">
   <caption>
