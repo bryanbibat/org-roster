@@ -1,0 +1,19 @@
+<% form_for(@batch) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :applicant_batch %><br />
+    <%= f.text_field :applicant_batch %>
+  </p>
+  <p>
+    <%= f.label :year %><br />
+    <%= f.text_field :year %>
+  </p>
+  <p>
+    <%= f.submit button_label %>
+  </p>
+<% end %>
