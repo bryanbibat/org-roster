@@ -2,33 +2,7 @@
 
 <h1>Editing Committee</h1>
 
-<% form_for(@committee) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :code %><br />
-    <%= f.text_field :code %>
-  </p>
-  <p>
-    <%= f.label :full_name %><br />
-    <%= f.text_field :full_name %>
-  </p>
-  <p>
-    <%= f.label :year_added, "Year Institutionalized" %><br />
-    <%= f.text_field :year_added %>
-  </p>
-  <p>
-    <%= f.label :year_removed %><br />
-    <%= f.text_field :year_removed %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+<%= render :partial => 'form', :locals => { :button_label => 'Update' } %>
 
 <p>
 <%= link_to 'Show', @committee %> |
