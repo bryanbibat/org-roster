@@ -33,14 +33,15 @@ Feature: Manage Users
     And I should not see a link to "/users/new" with text "New User"
 
   Scenario: View list of users
-    Given the following users exist
-      | last_name | first_name | email         | password | nickname | status |
-      | Doe       | John       | admin@xyz.com | secret   | JD       | Alumni |
-      | Allen     | Alice      | alice@xyz.com | secret   |          | Member |
+    Given a batch exists 
+    And the following users exist
+      | last_name | first_name | email         | password | nickname | status | batch          |
+      | Doe       | John       | admin@xyz.com | secret   | JD       | Alumni | the 1st batch  |
+      | Allen     | Alice      | alice@xyz.com | secret   |          | Member | the 1st batch  |
     When I login as "alice@xyz.com" with password "secret"
     And I go to the list users page
     Then I should see users table
-      | | Name          | Batch | Status             |
-      | | Alice Allen   |       | Member             |
-      | | JD (John Doe) |       | Alumni, Site Admin | 
+      | | Name          | Batch                  | Status             |
+      | | Alice Allen   | Founding Member (2000) | Member             |
+      | | JD (John Doe) | Founding Member (2000) | Alumni, Site Admin | 
 

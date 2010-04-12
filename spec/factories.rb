@@ -7,5 +7,9 @@ Factory.define :user do |f|
   f.batch_id 1
 end
 
-
+Factory.define :batch do |f|
+  f.name "founding"
+  f.applicant_batch 0
+  f.year 2000
+end
   
