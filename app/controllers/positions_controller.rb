@@ -89,7 +89,7 @@ class PositionsController < ApplicationController
   private
     def set_years
       @year_founded = SystemParameter.find_by_code("year_founded").value.to_i
-      @current_academic_year = Time.now.year - (Time.now.month < 6 ? 1 : 0)
+      @current_academic_year = Time.now.year - (Time.now.month < 4 ? 1 : 0)
     end
 
 end
